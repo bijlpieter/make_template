@@ -16,10 +16,10 @@ CXX := g++
 all: $(OBJECTS)
 	$(CC) $(CCFLAGS) $(INCLUDE) $(OBJECTS) -o $(TARGET) $(LIBPATH) $(LIBS)
 
-%.o: ./src/%.c
+%.o: ../src/%.c
 	$(CC) $(CCFLAGS) $(INCLUDE) -c $< -o $@
 
-%.o: ./src/%.cpp
+%.o: ../src/%.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
