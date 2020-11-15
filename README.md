@@ -1,6 +1,6 @@
 # Sample C template for `make`
 ## How to structure your code repository:
-- All header files (`.h`) go in `include/` directory (or any subdirectory in `include/`).
+- All header files (`.h`) go in `include/` directory (or any subdirectory in `include/`), or along with their respectice .c files in the `src/` directory.
 - All source files (`.c`) go in `src/` directory (or any subdirectory in `src/`).
 ## How to (re)compile your files:
 - Open a terminal in the folder with the `Makefile` and run `make all`.
