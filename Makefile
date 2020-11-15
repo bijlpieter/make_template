@@ -1,27 +1,31 @@
-TARGET := main
-SOURCES := $(wildcard src/*.c src/*.cpp)
-OBJECTS := $(patsubst src%,obj%, $(patsubst %.c,%.o, $(patsubst %.cpp,%.o,$(SOURCES))))
+# Specify yourself
 
-INCLUDE := -I./include
+SDIR := src
+IDIR := include
+ODIR := obj
+
 LIBPATH :=
 LIBS :=
 
-FLAGS := -Wall
-CCFLAGS := $(FLAGS) -std=c99
-CXXFLAGS := $(FLAGS)
+CC = gcc
+FLAGS = -Wall
 
-CC := gcc
-CXX := g++
+TARGET := main
+
+# Make stuff
+
+.PHONY: all clean
+
+SOURCES = $(shell find src/ -type f -name "*.c")
+OBJECTS = $(patsubst $(SDIR)/%.c, $(ODIR)/%.o, $(SOURCES))
 
 all: $(OBJECTS)
-	$(CC) $(CCFLAGS) $(INCLUDE) $(OBJECTS) -o $(TARGET) $(LIBPATH) $(LIBS)
+	$(CC) $(FLAGS) -I $(IDIR) $(OBJECTS) $(LIBPATH) $(LIBS) -o $(TARGET)
 
-%.o: ../src/%.c
-	$(CC) $(CCFLAGS) $(INCLUDE) -c $< -o $@
-
-%.o: ../src/%.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
+$(ODIR)/%.o: $(SDIR)/%.c
+	@mkdir -p $(@D)
+	$(CC) $(FLAGS) -I $(IDIR) -c $< -o $@
 
 clean:
-	rm -rf obj/*
+	rm -rf $(ODIR)/
 	rm -f $(TARGET)
