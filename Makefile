@@ -16,7 +16,7 @@ TARGET := main
 
 .PHONY: all clean
 
-SOURCES = $(shell find src/ -type f -name "*.c")
+SOURCES = $(shell find $(SDIR)/ -type f -name "*.c")
 OBJECTS = $(patsubst $(SDIR)/%.c, $(ODIR)/%.o, $(SOURCES))
 
 all: $(OBJECTS)
